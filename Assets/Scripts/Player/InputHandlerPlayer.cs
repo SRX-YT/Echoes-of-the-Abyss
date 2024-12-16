@@ -65,7 +65,6 @@ public class InputHandler : MonoBehaviour
 
         playerRotate = playerGO.GetComponent<PlayerRotate>();
         playerMove = playerGO.GetComponent<PlayerMove>();
-
         cameraRotate = playerGO.GetComponent<CameraRotate>();
     }
 
@@ -73,7 +72,6 @@ public class InputHandler : MonoBehaviour
     {
         if (playerRotate == null) { Debug.LogError("playerRotate is NULL!"); }
         if (playerMove == null) { Debug.LogError("playerMove is NULL!"); }
-
         if (cameraRotate == null) { Debug.LogError("cameraRotate is NULL!"); }
     }
 
