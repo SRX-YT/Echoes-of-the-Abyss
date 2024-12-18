@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class InputHandler : MonoBehaviour
+public class InputHandlerPlayer : MonoBehaviour
 {
     private PlayerRotate playerRotate;
     private PlayerMove playerMove;
