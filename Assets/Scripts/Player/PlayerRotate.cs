@@ -5,10 +5,8 @@ public class PlayerRotate : MonoBehaviour
     private Transform playerT;
 
     [Header("Settings")]
-    [SerializeField]
-    private float mouseSensetivity;
-    [SerializeField]
-    private float sensetivityMultiply;
+    [SerializeField] private float mouseSensetivity;
+    [SerializeField] private float sensetivityMultiply;
 
     private void Start()
     {

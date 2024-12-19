@@ -9,8 +9,7 @@ public class PlayerMove : MonoBehaviour
     private float gravityValue = -9.81f;
 
     [Header("Settings")]
-    [SerializeField]
-    private int playerSpeed;
+    [SerializeField] private int playerSpeed;
 
     private void Start()
     {

@@ -9,12 +9,9 @@ public class InputHandlerPlayer : MonoBehaviour
     private CameraRotate cameraRotate;
 
     [Header("Player Controls Settings")]
-    [SerializeField]
-    private InputAction playerMovementIA;
-    [SerializeField]
-    private InputAction playerRotateIA;
-    [SerializeField]
-    private InputAction cameraRotateIA;
+    [SerializeField] private InputAction playerMovementIA;
+    [SerializeField] private InputAction playerRotateIA;
+    [SerializeField] private InputAction cameraRotateIA;
 
     private void Start()
     {

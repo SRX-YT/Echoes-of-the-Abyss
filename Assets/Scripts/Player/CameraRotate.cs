@@ -9,10 +9,8 @@ public class CameraRotate : MonoBehaviour
     private float xRotationLimit = 90f;
 
     [Header("Settings")]
-    [SerializeField]
-    private float mouseSensetivity;
-    [SerializeField]
-    private float sensetivityMultiply;
+    [SerializeField] private float mouseSensetivity;
+    [SerializeField] private float sensetivityMultiply;
 
     private void Start()
     {
