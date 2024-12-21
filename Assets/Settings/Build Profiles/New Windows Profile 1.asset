@@ -10,16 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 15003, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: New Windows Profile
+  m_Name: New Windows Profile 1
   m_EditorClassIdentifier: 
   m_AssetVersion: 1
   m_BuildTarget: 19
   m_Subtarget: 2
   m_PlatformId: 4e3c793746204150860bf175a9a41a05
   m_PlatformBuildProfile:
-    rid: 7150013369222955071
-  m_OverrideGlobalSceneList: 0
-  m_Scenes: []
+    rid: 3016038944719503436
+  m_OverrideGlobalSceneList: 1
+  m_Scenes:
+  - m_enabled: 1
+    m_path: Assets/Scenes/SampleScene.unity
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:
     m_Settings:
@@ -34,8 +36,8 @@ MonoBehaviour:
     - line: '|   targetDevice: 2'
     - line: '|   useOnDemandResources: 0'
     - line: '|   accelerometerFrequency: 60'
-    - line: '|   companyName: DefaultCompany'
-    - line: '|   productName: MobileGame'
+    - line: '|   companyName: Byte0x'
+    - line: '|   productName: Echoes Of The Abyss'
     - line: '|   defaultCursor: {instanceID: 0}'
     - line: '|   cursorHotspot: {x: 0, y: 0}'
     - line: '|   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b:
@@ -112,7 +114,7 @@ MonoBehaviour:
     - line: '|   deferSystemGesturesMode: 0'
     - line: '|   hideHomeButton: 0'
     - line: '|   submitAnalytics: 1'
-    - line: '|   usePlayerLog: 1'
+    - line: '|   usePlayerLog: 0'
     - line: '|   dedicatedServerOptimizations: 1'
     - line: '|   bakeCollisionMeshes: 0'
     - line: '|   forceSingleInstance: 0'
@@ -163,7 +165,7 @@ MonoBehaviour:
     - line: '|   loadStoreDebugModeEnabled: 0'
     - line: '|   visionOSBundleVersion: 1.0'
     - line: '|   tvOSBundleVersion: 1.0'
-    - line: '|   bundleVersion: 0.1.0'
+    - line: '|   bundleVersion: 0.0.1'
     - line: '|   preloadedAssets: []'
     - line: '|   metroInputSource: 0'
     - line: '|   wsaTransparentSwapchain: 0'
@@ -539,6 +541,13 @@ MonoBehaviour:
     - line: '|       m_Height: 720'
     - line: '|       m_Kind: 1'
     - line: '|       m_SubKind: '
+    - line: '|   - m_BuildTarget: VisionOS'
+    - line: '|     m_Icons:'
+    - line: '|     - m_Textures: []'
+    - line: '|       m_Width: 1024'
+    - line: '|       m_Height: 1024'
+    - line: '|       m_Kind: 0'
+    - line: '|       m_SubKind: '
     - line: '|   m_BuildTargetBatching: []'
     - line: '|   m_BuildTargetShaderSettings: []'
     - line: '|   m_BuildTargetGraphicsJobs: []'
@@ -876,7 +885,7 @@ MonoBehaviour:
     - line: '|   m_RenderingPath: 1'
     - line: '|   m_MobileRenderingPath: 1'
     - line: '|   metroPackageName: MobileGame'
-    - line: '|   metroPackageVersion: '
+    - line: '|   metroPackageVersion: 1.0.0.0'
     - line: '|   metroCertificatePath: '
     - line: '|   metroCertificatePassword: '
     - line: '|   metroCertificateSubject: '
@@ -884,7 +893,7 @@ MonoBehaviour:
     - line: '|   metroCertificateNotAfter: 0000000000000000'
     - line: '|   metroApplicationDescription: MobileGame'
     - line: '|   wsaImages: {}'
-    - line: '|   metroTileShortName: '
+    - line: '|   metroTileShortName: MobileGame'
     - line: '|   metroTileShowName: 0'
     - line: '|   metroMediumTileShowName: 0'
     - line: '|   metroLargeTileShowName: 0'
@@ -972,9 +981,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
-    - rid: 7150013369222955071
+    - rid: 3016038944719503436
       type: {class: WindowsPlatformSettings, ns: UnityEditor.WindowsStandalone, asm: UnityEditor.WindowsStandalone.Extensions}
       data:
         m_Development: 0
