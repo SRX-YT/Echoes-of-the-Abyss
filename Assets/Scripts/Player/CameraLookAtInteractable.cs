@@ -15,8 +15,6 @@ public class CameraLookAtInteractable : MonoBehaviour
 
     // UI interactable
     private GameObject interactableChoisePanelUI;
-    private Interactable interactable;
-    private List<GameObject> interactableText = new List<GameObject>();
 
     [Header("Settings")]
     [SerializeField] private LayerMask layerMask;
@@ -43,17 +41,6 @@ public class CameraLookAtInteractable : MonoBehaviour
                 }
 
                 interactableChoisePanelUI.SetActive(true);
-
-                if (interactable == null)
-                {
-                    interactable = _hit.collider.GetComponent<Interactable>();
-                    foreach (string item in interactable.GetActions())
-                    {
-                        GameObject go = new GameObject(item + "Text");
-                        go.transform.SetParent(interactableChoisePanelUI.transform, false);
-                        interactableText.Add(go);
-                    }
-                }
             }
             else
             {
@@ -71,15 +58,6 @@ public class CameraLookAtInteractable : MonoBehaviour
         if (outline != null) { Destroy(outline); }
 
         interactableChoisePanelUI.SetActive(false);
-
-        interactable = null;
-
-        for (int i = 0; i < interactableText.Count; i++)
-        {
-            Destroy(interactableText[i]);
-        }
-
-        interactableText.Clear();
     }
 
     private void InitDependencies()
