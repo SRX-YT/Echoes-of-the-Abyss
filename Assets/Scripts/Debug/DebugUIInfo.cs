@@ -3,9 +3,6 @@ using UnityEngine;
 
 public class DebugUIInfo : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI versionText;
-    [SerializeField] private TextMeshProUGUI velocityText;
-    [SerializeField] private TextMeshProUGUI speedText;
     [SerializeField] private TextMeshProUGUI timeText;
     [SerializeField] private TextMeshProUGUI fpsText;
 
@@ -18,9 +15,6 @@ public class DebugUIInfo : MonoBehaviour
 
     private void Update()
     {
-        velocityText.text = characterController.velocity.ToString();
-        speedText.text = characterController.velocity.magnitude.ToString();
-
         deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
         float fps = 1.0f / deltaTime;
         fpsText.text = Mathf.Ceil(fps).ToString() + " : Fps";
