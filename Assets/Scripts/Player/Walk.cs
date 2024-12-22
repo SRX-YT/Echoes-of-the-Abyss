@@ -19,4 +19,9 @@ public class Walk : MonoBehaviour
     {
         multiply = value;
     }
+
+    public void ResetMultiply()
+    {
+        multiply = 1f;
+    }
 }

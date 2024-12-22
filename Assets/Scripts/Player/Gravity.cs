@@ -19,4 +19,9 @@ public class Gravity : MonoBehaviour
         velocity.y += value * Time.deltaTime;
         characterController.Move(velocity * Time.deltaTime);
     }
+
+    public void SetVelocity(float y)
+    {
+        velocity.y = y;
+    }
 }

@@ -24,6 +24,7 @@ class InputHandler : MonoBehaviour
     [SerializeField] private Jump jump;
     [SerializeField] private Run run;
     [SerializeField] private Duck duck;
+    private bool canRun = true;
 
     // Player + Submarine
     [SerializeField] private Swim swim;
@@ -42,6 +43,7 @@ class InputHandler : MonoBehaviour
         CheckRun();
         CheckZoom();
         CheckDuck();
+        CheckJump();
     }
 
     private void CheckWalk()
@@ -72,14 +74,26 @@ class InputHandler : MonoBehaviour
 
     }
 
+    private void CheckJump()
+    {
+        if (jumpIA.ReadValue<float>() != 0)
+        {
+            jump.DoJump();
+            canRun = false;
+        } else
+        {
+            canRun = true;
+        }
+    }
+
     private void CheckRun()
     {
-        if (runIA.ReadValue<float>() != 0)
+        if (runIA.ReadValue<float>() != 0 && canRun)
         {
             run.DoRun();
         } else
         {
-            walk.SetMultiply(1);
+            walk.ResetMultiply();
         }
     }
 
@@ -88,6 +102,12 @@ class InputHandler : MonoBehaviour
         if (duckIA.ReadValue<float>() != 0)
         {
             duck.DoDuck();
+            walk.SetMultiply(0.5f);
+            canRun = false;
+        } else if (!canRun)
+        {
+            walk.ResetMultiply();
+            canRun = true;
         } else
         {
             duck.StopDuck();
