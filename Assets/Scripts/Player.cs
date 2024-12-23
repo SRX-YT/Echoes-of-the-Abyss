@@ -35,6 +35,18 @@ public class Player : MonoBehaviour
     private float currentFov;
     private float targetFov;
 
+    // Movement
+    [Header("Movement")]
+    
+
+    // Gravity
+    [Header("Gravity")]
+    [Range(0f, 1f)]
+    [SerializeField] private float groundCheckDistance;
+    [SerializeField] private LayerMask groundLayer;
+    private Transform t_groundCheck; // INIT
+
+
     /*
      *********
      * START *
@@ -65,6 +77,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         CheckInputs();
+        DebugAll();
     }
 
     /*
@@ -83,6 +96,33 @@ public class Player : MonoBehaviour
 
         if (IA_zoom.ReadValue<float>() != 0f) { DoZoom(); }
         else { StopZoom(); }
+
+        Vector2 axis = IA_walk.ReadValue<Vector2>();
+        if (axis != Vector2.zero) {}
+    }
+
+    /*
+     ************
+     * MOVEMENT *
+     ************
+     */
+
+    
+
+    /*
+     ***********
+     * GRAVITY *
+     ***********
+     */
+
+    private void Gravity()
+    {
+
+    }
+
+    private bool IsGrounded()
+    {
+        return Physics.Raycast(t_groundCheck.position, Vector3.down, groundCheckDistance, groundLayer);
     }
 
     /*
@@ -149,6 +189,17 @@ public class Player : MonoBehaviour
     }
 
     /*
+     *********
+     * DEBUG *
+     *********
+     */
+
+    private void DebugAll()
+    {
+        Debug.DrawRay(t_groundCheck.position, Vector3.down * groundCheckDistance, Color.red);
+    }
+
+    /*
      ********
      * INIT *
      ********
@@ -159,6 +210,7 @@ public class Player : MonoBehaviour
         cam_mainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();
         t_uiCamera = GameObject.Find("UICamera").GetComponent<Transform>();
         t_player = gameObject.GetComponent<Transform>();
+        t_groundCheck = GameObject.Find("GroundCheck").GetComponent<Transform>();
     }
 
     private void CheckDependencies()
@@ -166,5 +218,6 @@ public class Player : MonoBehaviour
         if (cam_mainCamera == null) { Debug.LogError("cam_mainCamera is NULL", this); }
         if (t_uiCamera == null) { Debug.LogError("t_uiCamera is NULL", this); }
         if (t_player == null) { Debug.LogError("t_player is NULL", this); }
+        if (t_groundCheck == null) { Debug.LogError("t_groundCheck is NULL", this); }
     }
 }
