@@ -66,8 +66,20 @@ public class Player : MonoBehaviour
     [SerializeField] private float f_bobFreq = 10.0f;
     [Range(10f, 100f)]
     [SerializeField] private float f_bobSmooth = 10.0f;
-    private Transform t_cameraPivot;
+    private float f_bobRunFreq;
+    private float f_bobCrouchFreq;
+    private Transform t_headbobPivot;
     private Vector3 bobStartPos;
+
+    // Crouch
+    [Header("Crouch")]
+    [Range(0, 1f)]
+    [SerializeField] private float f_crouchHeight;
+    [Range(0, 5f)]
+    [SerializeField] private float f_crouchDelta;
+    private float f_normalHeight = 2.0f;
+    private Transform t_cameraPivot;
+    private Vector3 colCenter;
 
 
     /*
@@ -87,7 +99,12 @@ public class Player : MonoBehaviour
         CheckDependencies();
 
         // Headbob
-        bobStartPos = t_cameraPivot.localPosition;
+        bobStartPos = t_headbobPivot.localPosition;
+        f_bobRunFreq = f_bobFreq * 1.4f;
+        f_bobCrouchFreq = f_bobFreq * 0.6f;
+
+        // Crouch
+        colCenter = cc_player.center;
 
         // Zoom
         f_currentFov = cam_mainCamera.fieldOfView;
@@ -223,20 +240,35 @@ public class Player : MonoBehaviour
     
     private Vector3 StartHeadBob()
     {
+        // TODO: (HEADBOB) add state dependencies
         Vector3 pos = Vector3.zero;
 
-        // TODO: (HEADBOB) add state dependencies
-        pos.y += Mathf.Lerp(pos.y, Mathf.Sin(Time.time * f_bobFreq) * f_bobAmount * 1.4f, f_bobSmooth * Time.deltaTime);
-        pos.x += Mathf.Lerp(pos.x, Mathf.Cos(Time.time * f_bobFreq / 2) * f_bobAmount * 1.6f, f_bobSmooth * Time.deltaTime);
-        t_cameraPivot.localPosition += pos;
+        if (b_isRunning && !b_isCrouching)
+        {
+            
+            pos.y += Mathf.Lerp(pos.y, Mathf.Sin(Time.time * f_bobRunFreq) * f_bobAmount * 1.4f, f_bobSmooth * Time.deltaTime);
+            pos.x += Mathf.Lerp(pos.x, Mathf.Cos(Time.time * f_bobRunFreq / 2) * f_bobAmount * 1.6f, f_bobSmooth * Time.deltaTime);
+            t_headbobPivot.localPosition += pos;
+        }
+        else if (b_isCrouching && !b_isRunning)
+        {
+            pos.y += Mathf.Lerp(pos.y, Mathf.Sin(Time.time * f_bobCrouchFreq) * f_bobAmount * 1.4f, f_bobSmooth * Time.deltaTime);
+            pos.x += Mathf.Lerp(pos.x, Mathf.Cos(Time.time * f_bobCrouchFreq / 2) * f_bobAmount * 1.6f, f_bobSmooth * Time.deltaTime);
+            t_headbobPivot.localPosition += pos;
+        } else
+        {
+            pos.y += Mathf.Lerp(pos.y, Mathf.Sin(Time.time * f_bobFreq) * f_bobAmount * 1.4f, f_bobSmooth * Time.deltaTime);
+            pos.x += Mathf.Lerp(pos.x, Mathf.Cos(Time.time * f_bobFreq / 2) * f_bobAmount * 1.6f, f_bobSmooth * Time.deltaTime);
+            t_headbobPivot.localPosition += pos;
+        }
 
         return pos;
     }
 
     private void StopHeadbob()
     {
-        if (t_cameraPivot.localPosition == bobStartPos) return;
-        t_cameraPivot.localPosition = Vector3.Lerp(t_cameraPivot.localPosition, bobStartPos, 5 * Time.deltaTime);
+        if (t_headbobPivot.localPosition == bobStartPos) return;
+        t_headbobPivot.localPosition = Vector3.Lerp(t_headbobPivot.localPosition, bobStartPos, 7 * Time.deltaTime);
     }
 
     /*
@@ -247,12 +279,24 @@ public class Player : MonoBehaviour
 
     private void StartCrouch()
     {
-        cc_player.height = 1;
+        cc_player.height = Mathf.Lerp(cc_player.height, f_crouchHeight, f_crouchDelta * Time.deltaTime);
+
+        float f_centerY = (cc_player.height / 2) - (f_normalHeight / 2);
+        cc_player.center = new Vector3(colCenter.x, f_centerY, colCenter.z);
+
+        Vector3 cameraOffset = new Vector3(0, cc_player.height / 2 - 0.5f, 0);
+        t_cameraPivot.localPosition = cameraOffset;
     }
 
     private void StopCrouch()
     {
-        cc_player.height = 2;
+        cc_player.height = Mathf.Lerp(cc_player.height, f_normalHeight, f_crouchDelta * Time.deltaTime);
+
+        float f_centerY = (cc_player.height / 2) - (f_normalHeight / 2);
+        cc_player.center = new Vector3(colCenter.x, f_centerY, colCenter.z);
+
+        Vector3 cameraOffset = new Vector3(0, cc_player.height / 2 - 0.5f, 0);
+        t_cameraPivot.localPosition = cameraOffset;
     }
 
     /*
@@ -386,6 +430,7 @@ public class Player : MonoBehaviour
         t_player = gameObject.GetComponent<Transform>();
         cc_player = gameObject.GetComponent<CharacterController>();
         t_cameraPivot = GameObject.Find("CameraHolder").GetComponent<Transform>();
+        t_headbobPivot = GameObject.Find("HeadBobHolder").GetComponent<Transform>();
     }
 
     private void CheckDependencies()
@@ -395,6 +440,7 @@ public class Player : MonoBehaviour
         if (t_player == null) { Debug.LogError("t_player is NULL", this); }
         if (cc_player == null) { Debug.LogError("cc_player is NULL", this); }
         if (t_cameraPivot == null) { Debug.LogError("t_cameraPivot is NULL", this); }
+        if (t_headbobPivot == null) { Debug.LogError("t_headbobPivot is NULL", this); }
     }
 
     /*
