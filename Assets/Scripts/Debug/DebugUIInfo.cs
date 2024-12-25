@@ -5,13 +5,14 @@ public class DebugUIInfo : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI timeText;
     [SerializeField] private TextMeshProUGUI fpsText;
-
-    [SerializeField] private CharacterController characterController;
+    [SerializeField] private TextMeshProUGUI velocityText;
 
     [SerializeField] private WorldManager worldManager;
     private float hour, minute;
     private float currentMinute;
     private float deltaTime; // fps
+
+    [SerializeField] private Player player;
 
     private void Update()
     {
@@ -24,5 +25,7 @@ public class DebugUIInfo : MonoBehaviour
         currentMinute = (int)((worldManager.GetTime() / minute) - (int)(worldManager.GetTime() / hour) * 60);
 
         timeText.text = "Time: " + ((int)(worldManager.GetTime() / hour)).ToString() + ":" + currentMinute.ToString();
+
+        velocityText.text = player.GetVelocity().ToString();
     }
 }

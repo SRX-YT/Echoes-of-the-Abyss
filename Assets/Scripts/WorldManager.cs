@@ -12,6 +12,7 @@ class WorldManager : MonoBehaviour
         DayNightCycle();
     }
 
+    // TODO: (DAYNIGHTCYCLE) fix intensity light
     private void DayNightCycle()
     {
         // ”величиваем врем€ в зависимости от времени кадра
