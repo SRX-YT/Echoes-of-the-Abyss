@@ -3,8 +3,10 @@ using UnityEngine;
 class WorldManager : MonoBehaviour
 {
     // Day Night Cycle
-    [SerializeField] private Light directionalLight;
-    [SerializeField] private float dayDuration = 86400; // Seconds in day (1 hour = 86400)
+    [SerializeField]
+    private Light directionalLight;
+    [SerializeField]
+    private int dayDuration = 86400; // Seconds in day (1 hour = 86400)
     private float time;
 
     private void Update()

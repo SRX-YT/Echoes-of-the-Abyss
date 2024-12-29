@@ -3,20 +3,27 @@ using UnityEngine;
 
 public class DebugUIInfo : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI timeText;
-    [SerializeField] private TextMeshProUGUI fpsText;
-    [SerializeField] private TextMeshProUGUI velocityText;
-    [SerializeField] private TextMeshProUGUI speedText;
+    [SerializeField]
+    private TextMeshProUGUI timeText;
+    [SerializeField]
+    private TextMeshProUGUI fpsText;
+    [SerializeField]
+    private TextMeshProUGUI velocityText;
+    [SerializeField]
+    private TextMeshProUGUI speedText;
 
-    [SerializeField] private GameObject controlsPanel;
-    private bool b_controlsIsOpen = false;
+    [SerializeField]
+    private GameObject      controlsPanel;
+    private bool            b_controlsIsOpen = false;
 
-    [SerializeField] private WorldManager worldManager;
-    private float hour, minute;
-    private float currentMinute;
-    private float deltaTime; // fps
+    [SerializeField]
+    private WorldManager    worldManager;
+    private float           hour, minute;
+    private float           currentMinute;
+    private float           deltaTime; // fps
 
-    [SerializeField] private Player player;
+    [SerializeField]
+    private Player          player;
 
     private void Update()
     {
